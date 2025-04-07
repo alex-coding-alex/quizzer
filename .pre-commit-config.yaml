@@ -1,0 +1,13 @@
+repos:
+  - repo: local
+    hooks:
+      - id: composer-validate
+        name: Composer Validate
+        entry: composer lint
+        language: system
+#      - id: phpstan-validate
+#        name: PHPStan Validate
+#        entry: ./vendor/bin/phpstan analyse --memory-limit=2G
+#        language: system
+#        files: ^app/
+#        always_run: true
