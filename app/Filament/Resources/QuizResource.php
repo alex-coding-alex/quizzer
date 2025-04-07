@@ -17,6 +17,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class QuizResource extends Resource
 {
@@ -34,6 +35,11 @@ class QuizResource extends Resource
                     ->required(),
 
                 TextInput::make('description')
+                    ->required(),
+
+                Select::make('roles')
+                    ->label('Assigned to these roles')
+                    ->options(Role::all()->pluck('name', 'id'))
                     ->required(),
 
                 Select::make('user_id')
