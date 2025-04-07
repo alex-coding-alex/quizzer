@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\QuizResource\Pages;
 use App\Models\Quiz;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieTagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,6 +13,7 @@ use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\SpatieTagsColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -41,6 +43,8 @@ class QuizResource extends Resource
                     ->relationship('roles', 'name')
                     ->required(),
 
+                SpatieTagsInput::make('tags'),
+
                 Select::make('user_id')
                     ->disabled()
                     ->relationship('user', 'name')
@@ -58,6 +62,8 @@ class QuizResource extends Resource
                     ->sortable(),
 
                 TextColumn::make('description'),
+
+                SpatieTagsColumn::make('tags'),
 
                 TextColumn::make('user.name')
                     ->searchable()
