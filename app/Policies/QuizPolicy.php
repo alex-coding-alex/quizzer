@@ -12,18 +12,36 @@ class QuizPolicy
 
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
-    public function view(User $user, Quiz $quiz): bool {}
+    public function view(User $user, Quiz $quiz): bool
+    {
+        return $quiz->user_id === $user->id;
+    }
 
-    public function create(User $user): bool {}
+    public function create(User $user): bool
+    {
+        return true;
+    }
 
-    public function update(User $user, Quiz $quiz): bool {}
+    public function update(User $user, Quiz $quiz): bool
+    {
+        return $quiz->user_id === $user->id;
+    }
 
-    public function delete(User $user, Quiz $quiz): bool {}
+    public function delete(User $user, Quiz $quiz): bool
+    {
+        return $quiz->user_id === $user->id;
+    }
 
-    public function restore(User $user, Quiz $quiz): bool {}
+    public function restore(User $user, Quiz $quiz): bool
+    {
+        return false;
+    }
 
-    public function forceDelete(User $user, Quiz $quiz): bool {}
+    public function forceDelete(User $user, Quiz $quiz): bool
+    {
+        return false;
+    }
 }
