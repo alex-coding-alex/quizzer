@@ -4,10 +4,15 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\QuizResource\Pages;
 use App\Models\Quiz;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieTagsInput;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
@@ -44,6 +49,51 @@ class QuizResource extends Resource
                     ->required(),
 
                 SpatieTagsInput::make('tags'),
+
+                Repeater::make('questions')
+                    ->relationship()
+                    ->schema([
+                        TextInput::make('name')
+                            ->required(),
+                        Checkbox::make('is_multi_choice')
+                            ->live()
+                            ->default(true),
+
+                        Section::make('Multiple Choice Questions')
+                            ->description('Multiple Choice Questions')
+                            ->schema([
+                                TextInput::make('question_a')
+                                    ->label('Question A')
+                                    ->required(),
+                                TextInput::make('question_b')
+                                    ->label('Question B')
+                                    ->required(),
+                                TextInput::make('question_c')
+                                    ->label('Question C')
+                                    ->required(),
+                                TextInput::make('question_d')
+                                    ->label('Question D')
+                                    ->required(),
+                                Select::make('multi_choice_answer')
+                                    ->options([
+                                        'question_a' => 'A',
+                                        'question_b' => 'B',
+                                        'question_c' => 'C',
+                                        'question_d' => 'D',
+                                    ])
+                                    ->required(),
+                            ])
+                            ->visible(fn (Get $get): bool => $get('is_multi_choice')),
+
+                        Section::make('Free Questions')
+                            ->description('Free Questions')
+                            ->schema([
+                                Textarea::make('free_question')
+                                    ->required(),
+                            ])
+                            ->visible(fn (Get $get): bool => ! $get('is_multi_choice')),
+                    ])
+                    ->required(),
 
                 Select::make('user_id')
                     ->disabled()
