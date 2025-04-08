@@ -17,13 +17,13 @@ class Quiz extends Model
     protected $fillable = [
         'name',
         'description',
-        'user_id',
+        'course_id',
         'role_id',
     ];
 
-    public function user(): BelongsTo
+    public function course(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Course::class);
     }
 
     public function questions(): HasMany

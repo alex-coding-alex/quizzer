@@ -95,11 +95,11 @@ class QuizResource extends Resource
                     ])
                     ->required(),
 
-                Select::make('user_id')
-                    ->disabled()
-                    ->relationship('user', 'name')
-                    ->default(Auth::user()->id)
-                    ->required(),
+                //                Select::make('user_id')
+                //                    ->disabled()
+                //                    ->relationship('user', 'name')
+                //                    ->default(Auth::user()->id)
+                //                    ->required(),
             ]);
     }
 
@@ -115,9 +115,9 @@ class QuizResource extends Resource
 
                 SpatieTagsColumn::make('tags'),
 
-                TextColumn::make('user.name')
-                    ->searchable()
-                    ->sortable(),
+                //                TextColumn::make('user.name')
+                //                    ->searchable()
+                //                    ->sortable(),
             ])
             ->filters([
                 //

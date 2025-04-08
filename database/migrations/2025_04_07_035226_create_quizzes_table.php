@@ -12,7 +12,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('description');
-            $table->foreignUuid('user_id')->constrained('users');
+            $table->foreignUuid('course_id')->constrained('courses');
             $table->timestamps();
         });
     }
