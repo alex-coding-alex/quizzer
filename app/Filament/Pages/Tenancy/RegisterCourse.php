@@ -28,7 +28,8 @@ class RegisterCourse extends RegisterTenant
 
     protected function handleRegistration(array $data): Model
     {
-        $course = Course::create($data);
+        $course = new Course($data);
+        $course->save();
 
         $course->users()->attach(Auth::user());
 

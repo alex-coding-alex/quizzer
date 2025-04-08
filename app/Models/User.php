@@ -66,7 +66,9 @@ class User extends Authenticatable implements FilamentUser, HasTenants
 
     public function courses()
     {
-        return $this->belongsToMany(Course::class);
+        return $this->belongsToMany(Course::class)
+            ->using(CourseUser::class)
+            ->withTimestamps();
     }
 
     public function getTenants(Panel $panel): Collection
