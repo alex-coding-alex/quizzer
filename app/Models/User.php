@@ -9,6 +9,7 @@ use Filament\Panel;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
@@ -64,7 +65,7 @@ class User extends Authenticatable implements FilamentUser, HasTenants
             ->implode('');
     }
 
-    public function courses()
+    public function courses(): BelongsToMany
     {
         return $this->belongsToMany(Course::class)
             ->using(CourseUser::class)

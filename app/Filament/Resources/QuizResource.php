@@ -23,13 +23,10 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 
 class QuizResource extends Resource
 {
     protected static ?string $model = Quiz::class;
-
-    protected static ?string $slug = 'quizzes';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -94,12 +91,6 @@ class QuizResource extends Resource
                             ->visible(fn (Get $get): bool => ! $get('is_multi_choice')),
                     ])
                     ->required(),
-
-                //                Select::make('user_id')
-                //                    ->disabled()
-                //                    ->relationship('user', 'name')
-                //                    ->default(Auth::user()->id)
-                //                    ->required(),
             ]);
     }
 
@@ -114,10 +105,6 @@ class QuizResource extends Resource
                 TextColumn::make('description'),
 
                 SpatieTagsColumn::make('tags'),
-
-                //                TextColumn::make('user.name')
-                //                    ->searchable()
-                //                    ->sortable(),
             ])
             ->filters([
                 //
