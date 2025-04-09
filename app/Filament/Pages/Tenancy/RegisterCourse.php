@@ -7,7 +7,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Pages\Tenancy\RegisterTenant;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 
 class RegisterCourse extends RegisterTenant
 {
@@ -30,7 +29,7 @@ class RegisterCourse extends RegisterTenant
     {
         $course = Course::create($data);
 
-        $course->users()->attach(Auth::user());
+        $course->users()->attach(auth()->user());
 
         return $course;
     }
