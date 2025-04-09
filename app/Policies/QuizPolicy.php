@@ -17,7 +17,7 @@ class QuizPolicy
 
     public function view(User $user, Quiz $quiz): bool
     {
-        return $quiz->user_id === $user->id;
+        return true;
     }
 
     public function create(User $user): bool
@@ -27,21 +27,21 @@ class QuizPolicy
 
     public function update(User $user, Quiz $quiz): bool
     {
-        return $quiz->user_id === $user->id;
+        return true;
     }
 
     public function delete(User $user, Quiz $quiz): bool
     {
-        return $quiz->user_id === $user->id;
+        return true;
     }
 
     public function restore(User $user, Quiz $quiz): bool
     {
-        return false;
+        return true;
     }
 
     public function forceDelete(User $user, Quiz $quiz): bool
     {
-        return false;
+        return true;
     }
 }
