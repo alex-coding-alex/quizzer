@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Quiz;
 use App\Models\User;
+use Filament\Facades\Filament;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class QuizPolicy
@@ -17,7 +18,7 @@ class QuizPolicy
 
     public function view(User $user, Quiz $quiz): bool
     {
-        return true;
+        return $quiz->course->id === Filament::getTenant()->id;
     }
 
     public function create(User $user): bool
@@ -27,21 +28,21 @@ class QuizPolicy
 
     public function update(User $user, Quiz $quiz): bool
     {
-        return true;
+        return $quiz->course->id === Filament::getTenant()->id;
     }
 
     public function delete(User $user, Quiz $quiz): bool
     {
-        return true;
+        return $quiz->course->id === Filament::getTenant()->id;
     }
 
     public function restore(User $user, Quiz $quiz): bool
     {
-        return true;
+        return false;
     }
 
     public function forceDelete(User $user, Quiz $quiz): bool
     {
-        return true;
+        return false;
     }
 }
